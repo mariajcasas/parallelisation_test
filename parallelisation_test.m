@@ -1,6 +1,9 @@
 
-# Settings
+# Package Loading
+pkg("load", "struct");
+pkg("load", "parallel");
 
+# Init Variables
 # The content of P is not relevant for my parallelisation doubt so, a reduced set of strings is defined
 P = {"G++GG[G]", "GG—G", "GG[G[GG]G[GG]G]", "G++GG", "GG[GG]", "G[—G+G][G]", "G-[-GG]", "[]", "[[GG]]", "G"};
 
@@ -8,6 +11,7 @@ targetaspectratio = 0.01;
 branchingweight = 0.2;
 
 numCores = nproc();
+
 
 timeStart = tic();
 fun = @(idx) evaluationParallel_test(P{idx,:}, targetaspectratio, branchingweight);
