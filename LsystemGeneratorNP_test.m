@@ -21,7 +21,7 @@ function [height, width, branchesnumber] = LsystemGeneratorNP_test(gene)
     height = length(strfind(phenotype, axiom));
     
     # Another easy and silly operation to get the width of the phenotype
-    candidate = symbolsset{randi(length(symbolsset))}
+    candidate = symbolsset{randi(length(symbolsset))};
     width = length(strfind(phenotype, candidate));
 
     # A nonsense way to calculate the branches number of the phenotype

@@ -2,7 +2,7 @@
 
 ## ⚠️ Warning: Experimental ⚠️
 
-Parallelisation test is a simple program in Octave where I would like to learn how to parallelise only a piece of code (function) in a sequential process.
+Parallelisation test is a simple program in Octave where I wanted to learn how to parallelise only a piece of code (function) in a sequential process. The target of this program is to learn how to pass the input parameters to the parcellfun function.  
 
 ## OS and Octave specs
 
@@ -29,6 +29,7 @@ Or you can do it downloading directly the files from Octave Forge running the fo
 
 Once the packages have been installed, the environment is ready to execute the program. The `parallelisation_test.m` file is the main one.
 
+* `populationGenerator.m` generates the input population cell array which also contains other input parameters that the `evaluationparallel.m` function needs to work.
 * `evaluationParallel_test.m` is the piece of code that I'm interested in parallelising
 * `LsystemGeneratorNP_test.m` and `getAspectRatioNP_test.m` (invoked by `evaluationParallel_test.m`) should be kept as sequential execution functions
 * `outputparam1` and `outputparam2` returned by `getAspectRationNP_test` function and later by `evaluationParallel_test` to the main program, ought to be the same size of P which is a cell string array with the initial set of elements.

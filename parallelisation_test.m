@@ -4,18 +4,36 @@ pkg("load", "struct");
 pkg("load", "parallel");
 
 # Init Variables
-# The content of P is not relevant for my parallelisation doubt so, a reduced set of strings is defined
-P = {"G++GG[G]", "GG—G", "GG[G[GG]G[GG]G]", "G++GG", "GG[GG]", "G[—G+G][G]", "G-[-GG]", "[]", "[[GG]]", "G"};
-
 targetaspectratio = 0.01;
 branchingweight = 0.2;
+maxgenelength = 10;
+maxgenenesting = 3;
+populationsize = 10000;
+
+
+fprintf("\n\n\n");
+totaltime = tic();
+
+geneGeneratorStart = tic();
+fprintf("parallelisation_test: geneGenerator\n");
+
+P = populationGenerator(maxgenelength, maxgenenesting, populationsize, targetaspectratio, branchingweight);
+
+geneGeneratorelapsedtime = toc(geneGeneratorStart);
+fprintf("parallelisation_test: Elapsed time %d\n", geneGeneratorelapsedtime);
 
 numCores = nproc();
 
+fprintf("parallelisation_test: parcellfun starts\n");
+parallelisationStart = tic();
 
-timeStart = tic();
-fun = @(idx) evaluationParallel_test(P{idx,:}, targetaspectratio, branchingweight);
-[outputparam1, outputparam2] = pararrayfun(numCores - 1, fun, rows(P), "UniformOutput", false);
+fun = @(P) evaluationParallel_test(P);
+[outputparam] = parcellfun(numCores, fun, P, "UniformOutput", false);
 
-elapsed_time = toc(timeStart);
-fprintf("parallelisation_test: Elapsed time %d\n", elapsed_time);
+parallelisationtime = toc(parallelisationStart);
+fprintf("parallelisation_test: Elapsed time %d\n", parallelisationtime);
+
+total_elapsed_time = toc(totaltime);
+fprintf("parallelisation_test: TOTAL Elapsed time %d\n", total_elapsed_time);
+
+outputparam
