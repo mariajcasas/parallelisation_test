@@ -16,11 +16,6 @@
 #   populationsize: int
 #                   Number of individuals of the population
 #
-#   targetaspectratio: float
-#                      The target aspect ratio value
-#
-#   branchingweight: float
-#                    The weight given to the branching number property when calculating the aspect ratio
 #   Returns:
 #   --------
 #   P: Cell array of N elements, being N the population size and each cell has the following structure:
@@ -29,7 +24,7 @@
 #               [1,3]: branchingweight: float that represents the weight given to the branching number property when calculating the aspect ratio
 #
 ##
-function P = populationGenerator(maxgenelength, maxnestingnum, populationsize, targetaspectratio, branchingweight)
+function P = populationGenerator(maxgenelength, maxnestingnum, populationsize)
 
     nucleotides = {"G", "+", "-", "["}; # The close bracket is excluded from this original set of candidates
     logger.initSLF4O();
@@ -76,7 +71,7 @@ function P = populationGenerator(maxgenelength, maxnestingnum, populationsize, t
             gene = strcat(gene, candidate);
         endwhile
         
-        P{i} = [{gene num2str(targetaspectratio) num2str(branchingweight)}];
+        P{i} = gene;
 
     endfor
 
